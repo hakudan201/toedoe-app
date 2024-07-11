@@ -27,7 +27,11 @@
         <span v-else>{{ task.name }}</span>
       </div>
       <!-- <div class="task-date">24 Feb 12:00</div> -->
-      <TaskActions @edit="($event) => (isEdit = true)" v-show="!isEdit" />
+      <TaskActions
+        v-show="!isEdit"
+        @edit="($event) => (isEdit = true)"
+        @remove="removeTask"
+      />
     </div>
   </li>
 </template>
@@ -40,7 +44,7 @@ const props = defineProps({
   task: Object,
 });
 
-const emit = defineEmits(["updated", 'completed']);
+const emit = defineEmits(["updated", "completed", "removed"]);
 
 const isEdit = ref(false);
 
@@ -69,5 +73,11 @@ const markTaskAsCompleted = (event) => {
   const updatedTask = { ...props.task, is_completed: !props.task.is_completed };
   isEdit.value = false;
   emit("completed", updatedTask);
+};
+
+const removeTask = () => {
+  if (confirm("Are you sure?")) {
+    emit("removed", props.task)
+  }
 };
 </script>
