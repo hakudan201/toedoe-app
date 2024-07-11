@@ -23,8 +23,8 @@
 
 <script setup>
 import { computed } from "vue"
-import IconPencil from './icons/IconPencil.vue'
-import IconTrash from './icons/IconTrash.vue'
+import IconPencil from '../icons/IconPencil.vue'
+import IconTrash from '../icons/IconTrash.vue'
 
 const props = defineProps({
     task: Object,
