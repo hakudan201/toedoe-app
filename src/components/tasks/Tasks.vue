@@ -1,18 +1,23 @@
 <template>
-    <div class="card mt-2">
-        <ul class="list-group list-group-flush" v-if="tasks.length && show">
-            <Task v-for="task in tasks" :task="task" :key="task.id" />
-        </ul>
-    </div>
+  <div class="card mt-2">
+    <ul class="list-group list-group-flush" v-if="tasks.length && show">
+      <Task
+        v-for="task in tasks"
+        :task="task"
+        :key="task.id"
+        @update="$emit('updated', $event)"
+      />
+    </ul>
+  </div>
 </template>
 
 <script setup>
-import Task from './Task.vue'
+import Task from "./Task.vue";
 defineProps({
-    tasks: Array,
-    show: {
-        type: Boolean,
-        default: true
-    }
-})
+  tasks: Array,
+  show: {
+    type: Boolean,
+    default: true,
+  },
+});
 </script>

@@ -19,6 +19,7 @@
             type="text"
             @keyup.esc="($event) => (isEdit = false)"
             v-focus
+            @keyup.enter="updateTask"
           />
         </div>
         <span v-else>{{ task.name }}</span>
@@ -37,6 +38,8 @@ const props = defineProps({
   task: Object,
 });
 
+const emit = defineEmits(["updated"]);
+
 const isEdit = ref(false);
 
 const completedClass = computed(() =>
@@ -45,5 +48,11 @@ const completedClass = computed(() =>
 
 const vFocus = {
   mounted: (el) => el.focus(),
+};
+
+const updateTask = (event) => {
+  const updatedTask = { ...props.task, name: event.target.value };
+  isEdit.value = false;
+  emit("update", updatedTask);
 };
 </script>
