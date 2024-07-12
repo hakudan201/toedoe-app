@@ -23,9 +23,9 @@ const routes = [
     path: "/summary",
     component: SummaryPage,
     name: "summary",
-    // meta: {
-    //   auth: true,
-    // },
+    meta: {
+      auth: true,
+    },
   },
   {
     path: "/login",
