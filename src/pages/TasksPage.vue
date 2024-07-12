@@ -38,6 +38,8 @@
 
 <script setup>
 import { onMounted, computed, ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useTaskStore } from "../stores/task";
 import {
   allTasks,
   createTask,
@@ -48,11 +50,21 @@ import {
 import Tasks from "../components/tasks/Tasks.vue";
 import NewTask from "../components/tasks/NewTask.vue";
 
+const store = useTaskStore();
+const { task } = storeToRefs(store);
+// store.$patch({
+//   task: {
+//     name: "First task updated",
+//     is_completed: true,
+//   }
+// })
+
 const tasks = ref([]);
 
 onMounted(async () => {
   const { data } = await allTasks();
   tasks.value = data.data;
+  console.log(task.value);
 });
 
 const uncompletedTasks = computed(() =>
