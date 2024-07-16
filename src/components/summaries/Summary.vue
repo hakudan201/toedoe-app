@@ -1,5 +1,5 @@
 <template>
-    <li>[{{ task.created_at }}] {{ task.name }}</li>>
+    <li>[{{ task.created_at }}] {{ task.name }}</li>
 </template>
 
 <script setup>
